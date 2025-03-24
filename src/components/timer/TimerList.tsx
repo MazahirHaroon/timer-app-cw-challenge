@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useTimerStore } from '@store/useTimerStore';
 
-import { EmptyState, TimerItem } from 'src/components/Temporary';
+import { EmptyState, TimerItem } from 'src/components/timer';
 
 const TimerList: React.FC = () => {
   const { timers } = useTimerStore();
