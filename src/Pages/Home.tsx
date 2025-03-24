@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Plus, Clock } from 'lucide-react';
-import { TimerList } from './components/Timer/TimerList';
-import { AddTimerModal } from './components/Timer/Modal/AddTimerModal';
+import { TimerList } from '../components/Timer/TimerList';
+import { AddTimerModal } from '../components/Timer/Modal/AddTimerModal';
 import { Toaster } from 'sonner';
 
 function Home() {
