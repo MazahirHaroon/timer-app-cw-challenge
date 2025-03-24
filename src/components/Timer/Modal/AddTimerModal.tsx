@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { X, Clock } from 'lucide-react';
+
 import { useTimerStore } from '../../../store/useTimerStore';
 import { validateTimerForm } from '../../../utils/validation';
+
+import Input from '../../UI/Input';
 
 interface AddTimerModalProps {
   isOpen: boolean;
@@ -86,28 +89,23 @@ export const AddTimerModal: React.FC<AddTimerModalProps> = ({ isOpen, onClose })
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Title <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              onBlur={() => setTouched({ ...touched, title: true })}
-              maxLength={50}
-              className={`${
-                touched.title && !isTitleValid ? 'border-red-500' : 'border-gray-300'
-              } w-full px-4 py-2 border rounded-md focus:outline-2 focus:outline-blue-500`}
-              placeholder="Enter timer title"
-            />
-            {touched.title && !isTitleValid && (
-              <p className="mt-1 text-sm text-red-500">
-                Title is required and must be less than 50 characters
-              </p>
-            )}
+          <Input
+            label={'Title'}
+            type="text"
+            name="title"
+            value={title}
+            placeholder="Enter timer title"
+            required={true}
+            maxLength={50}
+            formError={{
+              hasError: touched.title && !isTitleValid,
+              errorMessage: 'Title is required and must be under 50 characters',
+            }}
+            onChange={(e) => setTitle(e.target.value)}
+            onBlur={() => setTouched({ ...touched, title: true })}
+          >
             <p className="mt-1 text-sm text-gray-500">{title.length}/50 characters</p>
-          </div>
+          </Input>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
