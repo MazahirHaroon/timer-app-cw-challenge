@@ -2,10 +2,8 @@ import React from 'react';
 
 import FieldWrapper from './FieldWrapper';
 
-interface FormErrorType {
-  hasError: boolean;
-  errorMessage: string;
-}
+import { FormErrorType } from '../../constant';
+import ErrorMessage from './ErrorMessage';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -32,7 +30,7 @@ const Input: React.FC<InputProps> = ({
         } w-full px-4 py-2 border rounded-md focus:outline-2 focus:outline-blue-500`}
       />
 
-      {hasError && <p className="mt-1 text-sm text-red-500">{errorMessage}</p>}
+      <ErrorMessage hasError={hasError} errorMessage={errorMessage} />
 
       {children}
     </FieldWrapper>

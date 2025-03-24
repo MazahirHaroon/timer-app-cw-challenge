@@ -1,11 +1,9 @@
 import React from 'react';
 
 import FieldWrapper from './FieldWrapper';
+import ErrorMessage from './ErrorMessage';
 
-interface FormErrorType {
-  hasError: boolean;
-  errorMessage: string;
-}
+import { FormErrorType } from '../../constant';
 
 interface TextAreaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
   label: string;
@@ -22,7 +20,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   children = null,
   ...props
 }) => {
-  const { hasError, errorMessage } = formError;
+  const { hasError = false, errorMessage = '' } = formError;
 
   return (
     <FieldWrapper label={label} required={required}>
@@ -33,7 +31,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         } w-full px-4 py-2 border rounded-md focus:outline-2 focus:outline-blue-500`}
       />
 
-      {hasError && <p className="mt-1 text-sm text-red-500">{errorMessage}</p>}
+      <ErrorMessage hasError={hasError} errorMessage={errorMessage} />
 
       {children}
     </FieldWrapper>
