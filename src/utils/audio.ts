@@ -18,7 +18,7 @@ export class TimerAudio {
       this.audioContext = new AudioContext();
     }
 
-    if (this.audioContext.state === "suspended") {
+    if (this.audioContext.state === 'suspended') {
       await this.audioContext.resume();
     }
   }
@@ -28,29 +28,20 @@ export class TimerAudio {
       await this.initializeAudioContext();
 
       if (!this.audioContext) {
-        throw new Error("AudioContext not initialized");
+        throw new Error('AudioContext not initialized');
       }
 
       // Create and configure oscillator
       this.oscillator = this.audioContext.createOscillator();
       this.gainNode = this.audioContext.createGain();
 
-      this.oscillator.type = "sine";
-      this.oscillator.frequency.setValueAtTime(
-        880,
-        this.audioContext.currentTime,
-      ); // A5 note
+      this.oscillator.type = 'sine';
+      this.oscillator.frequency.setValueAtTime(880, this.audioContext.currentTime); // A5 note
 
       // Configure gain (volume) envelope
       this.gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
-      this.gainNode.gain.linearRampToValueAtTime(
-        0.5,
-        this.audioContext.currentTime + 0.01,
-      );
-      this.gainNode.gain.linearRampToValueAtTime(
-        0,
-        this.audioContext.currentTime + 0.5,
-      );
+      this.gainNode.gain.linearRampToValueAtTime(0.5, this.audioContext.currentTime + 0.01);
+      this.gainNode.gain.linearRampToValueAtTime(0, this.audioContext.currentTime + 0.5);
 
       // Connect nodes
       this.oscillator.connect(this.gainNode);
@@ -65,7 +56,7 @@ export class TimerAudio {
         this.cleanup();
       }, 500);
     } catch (error) {
-      console.error("Failed to play audio:", error);
+      console.error('Failed to play audio:', error);
     }
   }
 

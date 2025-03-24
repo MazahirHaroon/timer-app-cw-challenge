@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Plus, Clock } from "lucide-react";
-import { TimerList } from "./components/TimerList";
-import { AddTimerModal } from "./components/AddTimerModal";
-import { Toaster } from "sonner";
+import { useState } from 'react';
+import { Plus, Clock } from 'lucide-react';
+import { TimerList } from './components/TimerList';
+import { AddTimerModal } from './components/AddTimerModal';
+import { Toaster } from 'sonner';
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,9 +14,7 @@ function Home() {
         <div className="flex justify-between">
           <div className="flex items-center gap-3">
             <Clock className="md:w-8 md:h-8 text-blue-600" />
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-              Timer App
-            </h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Timer App</h1>
           </div>
           <button
             onClick={() => setIsModalOpen(true)}
@@ -30,10 +28,7 @@ function Home() {
 
         <TimerList />
 
-        <AddTimerModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
+        <AddTimerModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </div>
     </div>
   );
