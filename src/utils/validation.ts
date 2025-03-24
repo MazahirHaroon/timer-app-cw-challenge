@@ -10,7 +10,7 @@ export interface TimerFormData {
 
 export const validateTimerForm = (data: TimerFormData): boolean => {
   const { title, hours, minutes, seconds } = data;
-  
+
   if (!title.trim()) {
     toast.error('Title is required');
     return false;
@@ -37,7 +37,8 @@ export const validateTimerForm = (data: TimerFormData): boolean => {
     return false;
   }
 
-  if (totalSeconds > 86400) { // 24 hours
+  if (totalSeconds > 86400) {
+    // 24 hours
     toast.error('Timer cannot exceed 24 hours');
     return false;
   }

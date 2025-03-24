@@ -7,14 +7,14 @@ export const TimerList: React.FC = () => {
   const { timers } = useTimerStore();
 
   return (
-    <div className="space-y-4 min-h-[400px]">
+    <section className="py-10 container space-y-4 min-h-[400px]">
       {timers.length === 0 ? (
-        <div className="h-[400px] flex flex-col items-center justify-center">
+        <div className="h-[400px] flex flex-col items-center justify-center text-center">
           <EmptyState />
-          <p className="text-center text-gray-500 text-xl font-medium">
+          <p className="text-gray-500 text-xl font-medium">
             No timers yet. Add one to get started!
           </p>
-          <p className="text-center text-gray-400 mt-2">
+          <p className="text-gray-400 mt-2">
             Click the "Add Timer" button above to create your first timer.
           </p>
         </div>
@@ -25,6 +25,6 @@ export const TimerList: React.FC = () => {
           ))}
         </div>
       )}
-    </div>
+    </section>
   );
 };

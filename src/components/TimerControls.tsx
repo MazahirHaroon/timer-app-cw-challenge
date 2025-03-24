@@ -17,7 +17,7 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
   onRestart,
 }) => {
   const isCompleted = remainingTime <= 0;
-  
+
   if (isCompleted) {
     return (
       <button
@@ -40,11 +40,7 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
       }`}
       title={isRunning ? 'Pause Timer' : 'Start Timer'}
     >
-      {isRunning ? (
-        <Pause className="w-6 h-6" />
-      ) : (
-        <Play className="w-6 h-6" />
-      )}
+      {isRunning ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
     </button>
   );
 };

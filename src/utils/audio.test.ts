@@ -73,4 +73,4 @@ describe('TimerAudio', () => {
 
     globalThis.AudioContext = originalAudioContext;
   });
-}); 
+});
