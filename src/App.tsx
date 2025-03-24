@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import { store } from './store/useTimerStore.ts';
 
-import Home from './Pages/Home.tsx';
+import { Home } from '@pages';
 
 import './index.css';
 

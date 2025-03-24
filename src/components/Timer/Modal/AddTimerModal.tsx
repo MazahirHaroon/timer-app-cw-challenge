@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { X, Clock } from 'lucide-react';
 
-import { useTimerStore } from '../../../store/useTimerStore';
-import { validateTimerForm } from '../../../utils/validation';
+import { useTimerStore } from '@store/useTimerStore';
+import { validateTimerForm } from '@utils/validation';
 
-import Input from '../../UI/Input';
-import TextArea from '../../UI/TextArea';
-import FieldWrapper from '../../UI/FieldWrapper';
-
+import { Input, TextArea, FieldWrapper } from '@@ui-components';
 interface AddTimerModalProps {
   isOpen: boolean;
   onClose: () => void;
