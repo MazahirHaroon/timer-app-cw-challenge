@@ -4,7 +4,8 @@ import { X, Clock } from 'lucide-react';
 import { useTimerStore } from '@store/useTimerStore';
 import { validateTimerForm } from '@utils/validation';
 
-import { Input, TextArea, FieldWrapper } from '@@ui-components';
+import { Input, TextArea, FieldWrapper } from '@ui-components';
+
 interface AddTimerModalProps {
   isOpen: boolean;
   onClose: () => void;
