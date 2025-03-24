@@ -151,7 +151,6 @@ export const AddTimerModal: React.FC<AddTimerModalProps> = ({ isOpen, onClose })
                 value={seconds}
                 onChange={(e) => setSeconds(Math.min(59, parseInt(e.target.value) || 0))}
                 onBlur={() => setTouched({ ...touched, seconds: true })}
-                className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
           </FieldWrapper>
