@@ -8,7 +8,7 @@ export default defineConfig({
     alias: {
       src: '/src',
       '@pages': '/src/pages/index',
-      '@timer-ui': '/src/components/UI/index',
+      '@ui': '/src/components/UI/index',
       '@components': '/src/components',
       '@constants': '/src/constants',
     },
