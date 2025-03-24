@@ -2,7 +2,7 @@ import React from 'react';
 
 import FieldWrapper from './FieldWrapper';
 
-import { FormErrorType } from '../../constant';
+import { FormErrorType } from '@constants';
 import ErrorMessage from './ErrorMessage';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
