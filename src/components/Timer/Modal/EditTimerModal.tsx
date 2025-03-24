@@ -11,7 +11,7 @@ interface EditTimerModalProps {
   timer: Timer;
 }
 
-export const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose, timer }) => {
+const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose, timer }) => {
   const [title, setTitle] = useState(timer.title);
   const [description, setDescription] = useState(timer.description);
   const [hours, setHours] = useState(Math.floor(timer.duration / 3600));
@@ -198,3 +198,5 @@ export const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose,
     </div>
   );
 };
+
+export default EditTimerModal;

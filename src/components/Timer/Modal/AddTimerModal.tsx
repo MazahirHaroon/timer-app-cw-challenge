@@ -13,7 +13,7 @@ interface AddTimerModalProps {
   onClose: () => void;
 }
 
-export const AddTimerModal: React.FC<AddTimerModalProps> = ({ isOpen, onClose }) => {
+const AddTimerModal: React.FC<AddTimerModalProps> = ({ isOpen, onClose }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [hours, setHours] = useState(0);
@@ -180,3 +180,5 @@ export const AddTimerModal: React.FC<AddTimerModalProps> = ({ isOpen, onClose })
     </div>
   );
 };
+
+export default AddTimerModal;

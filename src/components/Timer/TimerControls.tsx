@@ -9,7 +9,7 @@ interface TimerControlsProps {
   onRestart: () => void;
 }
 
-export const TimerControls: React.FC<TimerControlsProps> = ({
+const TimerControls: React.FC<TimerControlsProps> = ({
   isRunning,
   remainingTime,
   duration,
@@ -44,3 +44,5 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
     </button>
   );
 };
+
+export default TimerControls;

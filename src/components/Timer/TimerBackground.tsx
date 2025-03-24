@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const TimerBackground: React.FC = () => (
+const TimerBackground: React.FC = () => (
   <svg
     className="absolute inset-0 w-full h-full -z-10 opacity-5"
     viewBox="0 0 100 100"
@@ -11,3 +11,5 @@ export const TimerBackground: React.FC = () => (
     <path d="M50 20V50L70 70" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
+
+export default TimerBackground;

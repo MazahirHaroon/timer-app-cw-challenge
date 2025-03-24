@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { TimerItem } from './TimerItem';
+import TimerItem from './TimerItem';
 import { useTimerStore } from '../../store/useTimerStore';
-import { EmptyState } from './EmptyState';
+import EmptyState from './EmptyState';
 
-export const TimerList: React.FC = () => {
+const TimerList: React.FC = () => {
   const { timers } = useTimerStore();
 
   return (
@@ -29,3 +29,5 @@ export const TimerList: React.FC = () => {
     </section>
   );
 };
+
+export default TimerList;
