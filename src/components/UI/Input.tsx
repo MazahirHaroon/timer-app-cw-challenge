@@ -1,10 +1,8 @@
 import React from 'react';
 
-import FieldWrapper from './FieldWrapper';
+import { FieldWrapper, ErrorMessage } from '@ui-components';
 
 import { FormErrorType } from '@constants';
-import ErrorMessage from './ErrorMessage';
-
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   required?: boolean;
