@@ -14,6 +14,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const Input: React.FC<InputProps> = ({
   label,
+  type,
   required = false,
   formError = {},
   children,
@@ -25,9 +26,13 @@ const Input: React.FC<InputProps> = ({
     <FieldWrapper label={label} required={required}>
       <input
         {...props}
-        className={` ${
-          required && hasError ? 'border-red-500' : 'border-gray-300'
-        } w-full px-4 py-2 border rounded-md focus:outline-2 focus:outline-blue-500`}
+        className={`${
+          type === 'number'
+            ? '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+            : `${
+                required && hasError ? 'border-red-500' : 'border-gray-300'
+              } 'w-full px-3 py-2 border rounded-md focus:outline-2 focus:outline-blue-500`
+        }`}
       />
 
       <ErrorMessage hasError={hasError} errorMessage={errorMessage} />

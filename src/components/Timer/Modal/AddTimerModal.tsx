@@ -6,6 +6,7 @@ import { validateTimerForm } from '../../../utils/validation';
 
 import Input from '../../UI/Input';
 import TextArea from '../../UI/TextArea';
+import FieldWrapper from '../../UI/FieldWrapper';
 
 interface AddTimerModalProps {
   isOpen: boolean;
@@ -117,53 +118,43 @@ export const AddTimerModal: React.FC<AddTimerModalProps> = ({ isOpen, onClose })
             onChange={(e) => setDescription(e.target.value)}
           />
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">
-              Duration <span className="text-red-500">*</span>
-            </label>
+          <FieldWrapper label="Duration" required>
             <div className="grid grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm text-gray-600 mb-1">Hours</label>
-                <input
-                  type="number"
-                  min="0"
-                  max="23"
-                  value={hours}
-                  onChange={(e) => setHours(Math.min(23, parseInt(e.target.value) || 0))}
-                  onBlur={() => setTouched({ ...touched, hours: true })}
-                  className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none w-full px-3 py-2 border rounded-md focus:outline-2 focus:outline-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-600 mb-1">Minutes</label>
-                <input
-                  type="number"
-                  min="0"
-                  max="59"
-                  value={minutes}
-                  onChange={(e) => setMinutes(Math.min(59, parseInt(e.target.value) || 0))}
-                  onBlur={() => setTouched({ ...touched, minutes: true })}
-                  className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none w-full px-3 py-2 border rounded-md focus:outline-2 focus:outline-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-600 mb-1">Seconds</label>
-                <input
-                  type="number"
-                  min="0"
-                  max="59"
-                  value={seconds}
-                  onChange={(e) => setSeconds(Math.min(59, parseInt(e.target.value) || 0))}
-                  onBlur={() => setTouched({ ...touched, seconds: true })}
-                  className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none w-full px-3 py-2 border rounded-md focus:outline-2 focus:outline-blue-500"
-                />
-              </div>
-            </div>
-            {touched.hours && touched.minutes && touched.seconds && !isTimeValid && (
-              <p className="mt-2 text-sm text-red-500">Please set a duration greater than 0</p>
-            )}
-          </div>
+              <Input
+                label="Hours"
+                name="hours"
+                type="number"
+                min="0"
+                max="23"
+                value={hours}
+                onChange={(e) => setHours(Math.min(23, parseInt(e.target.value) || 0))}
+                onBlur={() => setTouched({ ...touched, hours: true })}
+              />
 
+              <Input
+                label="Minutes"
+                name="minutes"
+                type="number"
+                min="0"
+                max="59"
+                value={minutes}
+                onChange={(e) => setMinutes(Math.min(59, parseInt(e.target.value) || 0))}
+                onBlur={() => setTouched({ ...touched, minutes: true })}
+              />
+
+              <Input
+                label="Seconds"
+                name="seconds"
+                type="number"
+                min="0"
+                max="59"
+                value={seconds}
+                onChange={(e) => setSeconds(Math.min(59, parseInt(e.target.value) || 0))}
+                onBlur={() => setTouched({ ...touched, seconds: true })}
+                className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+          </FieldWrapper>
           <div className="flex justify-end gap-3 pt-4 border-t">
             <button
               type="button"
