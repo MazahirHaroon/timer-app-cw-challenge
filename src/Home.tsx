@@ -10,8 +10,8 @@ function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <Toaster position="top-right" />
-      <div className="container mx-auto px-4 py-8 md:w-[60%] lg:w-[40%]">
-        <div className="flex justify-between">
+      <div className="container mx-auto px-6 py-8 md:w-[75%]">
+        <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <Clock className="md:w-8 md:h-8 text-blue-600" />
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Timer App</h1>
