@@ -26,12 +26,10 @@ const Input: React.FC<InputProps> = ({
     <FieldWrapper label={label} required={required}>
       <input
         {...props}
-        className={`${
+        className={`w-full px-3 py-2 border rounded-md focus:outline-2 focus:outline-blue-500 ${
           type === 'number'
             ? '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
-            : `${
-                required && hasError ? 'border-red-500' : 'border-gray-300'
-              } 'w-full px-3 py-2 border rounded-md focus:outline-2 focus:outline-blue-500`
+            : `${required && hasError ? 'border-red-500' : 'border-gray-300'}`
         }`}
       />
 
