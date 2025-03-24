@@ -5,6 +5,7 @@ import { useTimerStore } from '../../../store/useTimerStore';
 import { validateTimerForm } from '../../../utils/validation';
 
 import Input from '../../UI/Input';
+import TextArea from '../../UI/TextArea';
 
 interface AddTimerModalProps {
   isOpen: boolean;
@@ -107,16 +108,14 @@ export const AddTimerModal: React.FC<AddTimerModalProps> = ({ isOpen, onClose })
             <p className="mt-1 text-sm text-gray-500">{title.length}/50 characters</p>
           </Input>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows={3}
-              className="w-full px-4 py-2 border rounded-md focus:outline-2 focus:outline-blue-500"
-              placeholder="Enter timer description (optional)"
-            />
-          </div>
+          <TextArea
+            label="Description"
+            value={description}
+            name="description"
+            rows={3}
+            placeholder="Enter timer description (optional)"
+            onChange={(e) => setDescription(e.target.value)}
+          />
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-3">
