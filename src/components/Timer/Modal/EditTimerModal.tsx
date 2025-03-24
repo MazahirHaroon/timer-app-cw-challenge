@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { X, Clock } from 'lucide-react';
-import { useTimerStore } from '../store/useTimerStore';
-import { validateTimerForm } from '../utils/validation';
-import { Timer } from '../types/timer';
+
+import { useTimerStore } from '@store/useTimerStore';
+import { validateTimerForm } from '@utils/validation';
+import { Timer } from '@types/timer';
 
 interface EditTimerModalProps {
   isOpen: boolean;
@@ -10,7 +11,7 @@ interface EditTimerModalProps {
   timer: Timer;
 }
 
-export const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose, timer }) => {
+const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose, timer }) => {
   const [title, setTitle] = useState(timer.title);
   const [description, setDescription] = useState(timer.description);
   const [hours, setHours] = useState(Math.floor(timer.duration / 3600));
@@ -197,3 +198,5 @@ export const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose,
     </div>
   );
 };
+
+export default EditTimerModal;
