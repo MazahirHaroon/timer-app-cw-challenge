@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Trash2, RotateCcw, Pencil } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { useTimerStore } from '@store/useTimerStore';
@@ -8,6 +7,8 @@ import { formatTime } from '@utils/time';
 import { TimerAudio } from '@utils/audio';
 
 import { EditTimerModal, TimerControls, TimerProgress } from '@components/timer';
+import { DeleteButton, EditButton, RestartTimerButton } from '@ui-components';
+
 interface TimerItemProps {
   timer: Timer;
 }
@@ -76,27 +77,9 @@ const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
               <p className="text-gray-600 mt-1">{timer.description}</p>
             </div>
             <div className="flex gap-2">
-              <button
-                onClick={() => setIsEditModalOpen(true)}
-                className="p-2 rounded-full hover:bg-blue-50 text-blue-500 transition-colors"
-                title="Edit Timer"
-              >
-                <Pencil className="w-5 h-5" />
-              </button>
-              <button
-                onClick={handleRestart}
-                className="p-2 rounded-full hover:bg-blue-50 text-blue-500 transition-colors"
-                title="Restart Timer"
-              >
-                <RotateCcw className="w-5 h-5" />
-              </button>
-              <button
-                onClick={handleDelete}
-                className="p-2 rounded-full hover:bg-red-50 text-red-500 transition-colors"
-                title="Delete Timer"
-              >
-                <Trash2 className="w-5 h-5" />
-              </button>
+              <EditButton onClick={() => setIsEditModalOpen(true)} title="Edit Timer" />
+              <RestartTimerButton onClick={handleRestart} />
+              <DeleteButton onClick={handleDelete} title="Delete Timer" />
             </div>
           </div>
           <div className="flex flex-col items-center mt-6">

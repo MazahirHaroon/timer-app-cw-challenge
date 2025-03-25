@@ -1,6 +1,7 @@
-import { X, Clock } from 'lucide-react';
 import React from 'react';
+import { Clock } from 'lucide-react';
 
+import { CloseButton } from '@ui-components';
 interface ModalWrapperProps {
   title: string;
   handleClick: () => void;
@@ -16,12 +17,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({ title, handleClick, childre
             <Clock className="w-5 h-5 text-blue-600" />
             <h2 className="text-xl font-semibold">{title}</h2>
           </div>
-          <button
-            onClick={handleClick}
-            className="p-1 hover:bg-gray-100 rounded-full transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <CloseButton onClick={handleClick} />
         </div>
         {children}
       </div>
