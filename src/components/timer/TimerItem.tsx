@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 
-import { useTimerStore } from '@store/useTimerStore';
+import { useTimerStore } from '@custom-hooks';
 import { Timer } from '@types/timer';
 import { formatTime } from '@utils/time';
 import { TimerAudio } from '@utils/audio';
@@ -15,9 +15,12 @@ interface TimerItemProps {
 
 const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
   const { toggleTimer, deleteTimer, updateTimer, restartTimer } = useTimerStore();
+
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const intervalRef = useRef<number | null>(null);
+
   const timerAudio = TimerAudio.getInstance();
+
+  const intervalRef = useRef<number | null>(null);
   const hasEndedRef = useRef(false);
 
   useEffect(() => {
@@ -28,7 +31,6 @@ const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
         if (timer.remainingTime <= 1 && !hasEndedRef.current) {
           hasEndedRef.current = true;
           timerAudio.play().catch(console.error);
-
           toast.success(`Timer "${timer.title}" has ended!`, {
             duration: 5000,
             action: {
@@ -41,7 +43,7 @@ const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
     }
 
     return () => clearInterval(intervalRef.current!);
-  }, [timer.isRunning, timer.id, timer.remainingTime, timer.title, timerAudio, updateTimer]);
+  }, [timer.isRunning, timer.id, timer.remainingTime, timer.title, timerAudio]);
 
   const handleRestart = () => {
     hasEndedRef.current = false;

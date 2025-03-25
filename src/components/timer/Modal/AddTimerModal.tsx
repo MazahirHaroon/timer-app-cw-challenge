@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useTimerStore } from '@store/useTimerStore';
+import { useTimerStore } from '@custom-hooks';
 import { validateTimerForm } from '@utils/validation';
 
 import { Input, TextArea, FieldWrapper, PrimaryButton, SecondaryButton } from '@ui-components';
