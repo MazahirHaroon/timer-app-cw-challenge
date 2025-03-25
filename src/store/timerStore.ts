@@ -30,10 +30,10 @@ const timerSlice = createSlice({
       }
     },
     updateTimer: (state, action) => {
-      const timer = state.list.find((timer) => timer.id === action.payload);
-      if (timer && timer.isRunning) {
-        timer.remainingTime -= 1;
-        timer.isRunning = timer.remainingTime > 0;
+      const { id, updates } = action.payload;
+      const timer = state.list.find((timer) => timer.id === id);
+      if (timer) {
+        Object.assign(timer, updates);
       }
     },
     restartTimer: (state, action) => {

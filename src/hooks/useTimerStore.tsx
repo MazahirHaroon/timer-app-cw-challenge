@@ -19,7 +19,7 @@ export const useTimerStore = () => {
     addTimer: (timer: Omit<Timer, 'id' | 'createdAt'>) => dispatch(addTimer(timer)),
     deleteTimer: (id: string) => dispatch(deleteTimer(id)),
     toggleTimer: (id: string) => dispatch(toggleTimer(id)),
-    updateTimer: (id: string) => dispatch(updateTimer(id)),
+    updateTimer: (id: string, updates: Partial<Timer>) => dispatch(updateTimer(id, updates)),
     restartTimer: (id: string) => dispatch(restartTimer(id)),
     editTimer: (id: string, updates: Partial<Timer>) => dispatch(editTimer({ id, updates })),
   };

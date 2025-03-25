@@ -17,6 +17,7 @@ const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
   const { toggleTimer, deleteTimer, updateTimer, restartTimer } = useTimerStore();
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState(timer.remainingTime);
 
   const timerAudio = TimerAudio.getInstance();
 
@@ -24,21 +25,26 @@ const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
   const hasEndedRef = useRef(false);
 
   useEffect(() => {
+    setCurrentTime(timer.remainingTime);
+  }, [timer.remainingTime]);
+
+  useEffect(() => {
     if (timer.isRunning) {
       intervalRef.current = window.setInterval(() => {
-        updateTimer(timer.id);
-
-        if (timer.remainingTime <= 1 && !hasEndedRef.current) {
-          hasEndedRef.current = true;
-          timerAudio.play().catch(console.error);
-          toast.success(`Timer "${timer.title}" has ended!`, {
-            duration: 5000,
-            action: {
-              label: 'Dismiss',
-              onClick: timerAudio.stop,
-            },
-          });
-        }
+        setCurrentTime((prev) => {
+          if (prev <= 1 && !hasEndedRef.current) {
+            hasEndedRef.current = true;
+            timerAudio.play().catch(console.error);
+            toast.success(`Timer "${timer.title}" has ended!`, {
+              duration: 5000,
+              action: {
+                label: 'Dismiss',
+                onClick: timerAudio.stop,
+              },
+            });
+          }
+          return Math.max(prev - 1, 0);
+        });
       }, 1000);
     }
 
@@ -56,8 +62,12 @@ const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
   };
 
   const handleToggle = () => {
-    if (timer.remainingTime <= 0) {
+    if (currentTime <= 0) {
       hasEndedRef.current = false;
+      restartTimer(timer.id);
+      setCurrentTime(timer.duration);
+    } else {
+      updateTimer(timer.id, { remainingTime: currentTime, isRunning: !timer.isRunning });
     }
     toggleTimer(timer.id);
   };
@@ -86,14 +96,14 @@ const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
           </div>
           <div className="flex flex-col items-center mt-6">
             <div className="text-4xl font-mono font-bold text-gray-800 mb-4">
-              {formatTime(timer.remainingTime)}
+              {formatTime(currentTime)}
             </div>
 
             <TimerProgress progress={(timer.remainingTime / timer.duration) * 100} />
 
             <TimerControls
               isRunning={timer.isRunning}
-              remainingTime={timer.remainingTime}
+              remainingTime={currentTime}
               duration={timer.duration}
               onToggle={handleToggle}
               onRestart={handleRestart}
