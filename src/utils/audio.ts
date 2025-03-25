@@ -41,7 +41,6 @@ export class TimerAudio {
       // Configure gain (volume) envelope
       this.gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
       this.gainNode.gain.linearRampToValueAtTime(0.5, this.audioContext.currentTime + 0.01);
-      this.gainNode.gain.linearRampToValueAtTime(0, this.audioContext.currentTime + 0.5);
 
       // Connect nodes
       this.oscillator.connect(this.gainNode);
