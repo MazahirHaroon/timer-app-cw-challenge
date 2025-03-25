@@ -1,6 +1,6 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
-import { useDispatch, useSelector } from 'react-redux';
-import { Timer } from '../types/timer';
+import { createSlice } from '@reduxjs/toolkit';
+
+import { Timer } from '@types/timer';
 
 const initialState = {
   timers: [] as Timer[],
@@ -11,10 +11,13 @@ const timerSlice = createSlice({
   initialState,
   reducers: {
     addTimer: (state, action) => {
-      state.timers.push({
-        ...action.payload,
+      const timer = {
         id: crypto.randomUUID(),
         createdAt: Date.now(),
+      };
+      state.timers.push({
+        ...action.payload,
+        ...timer,
       });
     },
     deleteTimer: (state, action) => {
@@ -51,26 +54,7 @@ const timerSlice = createSlice({
   },
 });
 
-const store = configureStore({
-  reducer: timerSlice.reducer,
-});
-
-export { store };
+export { timerSlice };
 
 export const { addTimer, deleteTimer, toggleTimer, updateTimer, restartTimer, editTimer } =
   timerSlice.actions;
-
-export const useTimerStore = () => {
-  const dispatch = useDispatch();
-  const timers = useSelector((state: { timers: Timer[] }) => state.timers);
-
-  return {
-    timers,
-    addTimer: (timer: Omit<Timer, 'id' | 'createdAt'>) => dispatch(addTimer(timer)),
-    deleteTimer: (id: string) => dispatch(deleteTimer(id)),
-    toggleTimer: (id: string) => dispatch(toggleTimer(id)),
-    updateTimer: (id: string) => dispatch(updateTimer(id)),
-    restartTimer: (id: string) => dispatch(restartTimer(id)),
-    editTimer: (id: string, updates: Partial<Timer>) => dispatch(editTimer({ id, updates })),
-  };
-};
