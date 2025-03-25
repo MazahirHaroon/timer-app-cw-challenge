@@ -12,6 +12,7 @@ export default defineConfig({
       '@components': '/src/components',
       '@utils': '/src/utils',
       '@store': '/src/store/index',
+      '@store-actions': '/src/store',
       '@custom-hooks': '/src/hooks/index',
       '@types': '/src/types',
     },
