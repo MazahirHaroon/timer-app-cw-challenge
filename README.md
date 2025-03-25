@@ -1,4 +1,87 @@
-# Timer App Assignment
+# Timer App [In Progress]
+
+A timer application that lets you create multiple timers and run them simultaneously. It also provides option edit the created timers and delete the ones you no longer wants.
+
+## **Tech Stack**
+
+- **[React](https://react.dev/)** (v18)
+- **[Redux](https://redux.js.org/)** (v5), **[Redux Toolkit](https://redux-toolkit.js.org/)** (v2.4.0), **[React Redux](https://react-redux.js.org/)** (v9)
+- **[Lucide React](https://lucide.dev/)** (v0.344.0) – A collection of open-source SVG icons.
+- **[Tailwind CSS](https://tailwindcss.com/)**
+- **[TypeScript](https://www.typescriptlang.org/)** (v5.5.3)
+- **[Vite](https://vitejs.dev/)** (v5.4.2) 
+- **[PostCSS](https://postcss.org/)** (v8.4.35) – A tool for transforming CSS with JavaScript plugins
+- **[Sonner](https://github.com/aviraldg/sonner)** (v1.4.3) – A simple toast notification library for React.
+- **[Vitest](https://vitest.dev/)** (v1.3.1) – A fast, unit testing framework built with Vite.
+- **[ESLint](https://eslint.org/)** (v9.9.1) 
+- **[Autoprefixer](https://github.com/postcss/autoprefixer)** (v10.4.18) 
+
+### Path Aliases
+
+- `@ui`: UI Components Directory
+- `@components`: Components Directory
+- `@pages`: Pages Directory
+- `@utils`: Utils Directory
+- `@store`: Redux Store Directory
+- `@types`: Types/Interfaces Directory
+
+
+## Folder Structure
+
+```graphql
+src/
+│── components/
+│   │   ├── UI/
+│   │   │   ├── Input.tsx
+│   │   │   ├── TextArea.tsx
+│   │   │   ├── FieldWrapper.tsx
+│   │   │   ├── ErrorMessage.tsx
+│   │   │   ├── index.ts (Re-exports all UI components)
+│   │   │   ├── Button/
+│   │   │   │   ├── Primary.tsx
+│   │   │   │   ├── Secondary.tsx
+│   │   │   │   ├── Edit.tsx
+│   │   │   │   ├── Delete.tsx
+│   │   │   │   ├── Close.tsx
+│   │   │   │   ├── TimerControls/
+│   │   │   │   │   ├── PlayPause.tsx
+│   │   │   │   │   ├── Restart.tsx
+│   |   |── timer/(Primitive UI elements used in larger components)
+│   │   ├── Modal/
+│   │   │   ├── AddTimerModal.tsx
+│   │   │   ├── EditTimerModal.tsx
+│   │   │   ├── ModalWrapper.tsx
+│   │   ├── EmptyState.tsx
+│   │   ├── TimerBackground.tsx
+│   │   ├── TimerControls.tsx
+│   │   ├── TimerItem.tsx
+│   │   ├── TimerList.tsx
+│   │   ├── TimerProgress.tsx
+│   │   ├── index.ts (Re-exports components)
+│── store/ (Redux store)
+│   ├── useTimerStore.ts
+│── types/ (interfaces/types)
+│   ├── ui.ts
+│   ├── timer.ts
+│── utils/ (utility functions)
+│   ├── ...
+│── pages/ (App pages/screens)
+│   ├── Home.tsx
+```
+
+
+---------
+---------
+
+
+
+
+
+
+
+
+
+## Assignment Details
 
 Welcome to the Timer App Assignment! This project is designed to evaluate your skills in React development, focusing on **UI implementation**, **code quality**, **state management**, and **best practices**. The project uses **React**, **Vite**, **Tailwind CSS**, and **Vitest** for testing.
 
