@@ -28,22 +28,6 @@ const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose, timer 
 
   const { editTimer } = useTimerStore();
 
-  useEffect(() => {
-    if (isOpen) {
-      setTitle(timer.title);
-      setDescription(timer.description);
-      setHours(Math.floor(timer.duration / 3600));
-      setMinutes(Math.floor((timer.duration % 3600) / 60));
-      setSeconds(timer.duration % 60);
-      setTouched({
-        title: false,
-        hours: false,
-        minutes: false,
-        seconds: false,
-      });
-    }
-  }, [isOpen, timer]);
-
   if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
