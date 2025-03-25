@@ -49,12 +49,6 @@ export class TimerAudio {
 
       // Start and stop the oscillator
       this.oscillator.start(this.audioContext.currentTime);
-      this.oscillator.stop(this.audioContext.currentTime + 0.5);
-
-      // Cleanup after sound ends
-      setTimeout(() => {
-        this.cleanup();
-      }, 500);
     } catch (error) {
       console.error('Failed to play audio:', error);
     }
