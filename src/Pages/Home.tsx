@@ -3,7 +3,7 @@ import { Plus, Clock } from 'lucide-react';
 import { Toaster } from 'sonner';
 
 import { PrimaryButton } from '@ui-components';
-import { TimerList, AddTimerModal } from '@components/timer';
+import { TimerList, TimerModal } from '@components/timer';
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +25,7 @@ function Home() {
 
         <TimerList />
 
-        <AddTimerModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <TimerModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </div>
     </div>
   );

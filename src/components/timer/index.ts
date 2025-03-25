@@ -4,9 +4,8 @@ import TimerItem from './TimerItem';
 import TimerProgress from './TimerProgress';
 import TimerControls from './TimerControls';
 import TimerBackground from './TimerBackground';
+import TimerModal from './Modal/TimerModal';
 import ModalWrapper from './Modal/ModalWrapper';
-import AddTimerModal from './Modal/AddTimerModal';
-import EditTimerModal from './Modal/EditTimerModal';
 
 export {
   EmptyState,
@@ -16,6 +15,5 @@ export {
   TimerControls,
   TimerBackground,
   ModalWrapper,
-  AddTimerModal,
-  EditTimerModal,
+  TimerModal,
 };
