@@ -39,7 +39,7 @@ const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
               duration: 5000,
               action: {
                 label: 'Dismiss',
-                onClick: timerAudio.stop,
+                onClick: timerAudio.stop.bind(timerAudio),
               },
             });
           }
