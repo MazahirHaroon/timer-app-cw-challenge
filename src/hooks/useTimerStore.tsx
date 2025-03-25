@@ -12,7 +12,7 @@ import {
 
 export const useTimerStore = () => {
   const dispatch = useDispatch();
-  const timers = useSelector((state: { timers: Timer[] }) => state.timers);
+  const timers = useSelector((state: { timer: { list: Timer[] } }) => state.timer.list);
 
   return {
     timers,

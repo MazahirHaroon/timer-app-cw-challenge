@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Timer } from '@types/timer';
 
 const initialState = {
-  timers: [] as Timer[],
+  list: [] as Timer[],
 };
 
 const timerSlice = createSlice({
-  name: 'timer',
+  name: 'timerLogic',
   initialState,
   reducers: {
     addTimer: (state, action) => {
@@ -15,36 +15,36 @@ const timerSlice = createSlice({
         id: crypto.randomUUID(),
         createdAt: Date.now(),
       };
-      state.timers.push({
+      state.list.push({
         ...action.payload,
         ...timer,
       });
     },
     deleteTimer: (state, action) => {
-      state.timers = state.timers.filter((timer) => timer.id !== action.payload);
+      state.list = state.list.filter((timer) => timer.id !== action.payload);
     },
     toggleTimer: (state, action) => {
-      const timer = state.timers.find((timer) => timer.id === action.payload);
+      const timer = state.list.find((timer) => timer.id === action.payload);
       if (timer) {
         timer.isRunning = !timer.isRunning;
       }
     },
     updateTimer: (state, action) => {
-      const timer = state.timers.find((timer) => timer.id === action.payload);
+      const timer = state.list.find((timer) => timer.id === action.payload);
       if (timer && timer.isRunning) {
         timer.remainingTime -= 1;
         timer.isRunning = timer.remainingTime > 0;
       }
     },
     restartTimer: (state, action) => {
-      const timer = state.timers.find((timer) => timer.id === action.payload);
+      const timer = state.list.find((timer) => timer.id === action.payload);
       if (timer) {
         timer.remainingTime = timer.duration;
         timer.isRunning = false;
       }
     },
     editTimer: (state, action) => {
-      const timer = state.timers.find((timer) => timer.id === action.payload.id);
+      const timer = state.list.find((timer) => timer.id === action.payload.id);
       if (timer) {
         Object.assign(timer, action.payload.updates);
         timer.remainingTime = action.payload.updates.duration || timer.duration;
@@ -54,7 +54,7 @@ const timerSlice = createSlice({
   },
 });
 
-export { timerSlice };
-
 export const { addTimer, deleteTimer, toggleTimer, updateTimer, restartTimer, editTimer } =
   timerSlice.actions;
+
+export default timerSlice.reducer;
