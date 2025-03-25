@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Timer } from '@types/timer';
-
 import {
   addTimer,
   deleteTimer,
@@ -9,7 +8,7 @@ import {
   updateTimer,
   restartTimer,
   editTimer,
-} from '@custom-hooks';
+} from '@store-actions/timerStore';
 
 export const useTimerStore = () => {
   const dispatch = useDispatch();
