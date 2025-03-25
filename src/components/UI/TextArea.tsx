@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FieldWrapper, ErrorMessage } from '@ui-components';
 
-import { FormErrorType } from '@constants';
+import { FormErrorType } from '@types/ui';
 interface TextAreaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
   label: string;
   rows: number;

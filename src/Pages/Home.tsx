@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Plus, Clock } from 'lucide-react';
 import { Toaster } from 'sonner';
 
+import { PrimaryButton } from '@ui-components';
 import { TimerList, AddTimerModal } from '@components/timer';
 
 function Home() {
@@ -16,14 +17,10 @@ function Home() {
             <Clock className="md:w-8 md:h-8 text-blue-600" />
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Timer App</h1>
           </div>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="flex items-center text-sm gap-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors
-            md:gap-2 md:px-4 md:py-3 md:text-base md:rounded-xl shadow-md hover:shadow-lg"
-          >
+          <PrimaryButton onClick={() => setIsModalOpen(true)}>
             <Plus className="w-5 h-5" />
             Add Timer
-          </button>
+          </PrimaryButton>
         </div>
 
         <TimerList />

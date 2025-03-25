@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { X, Clock } from 'lucide-react';
 
 import { useTimerStore } from '@store/useTimerStore';
 import { validateTimerForm } from '@utils/validation';
 
-import { Input, TextArea, FieldWrapper } from '@ui-components';
+import { Input, TextArea, FieldWrapper, PrimaryButton, SecondaryButton } from '@ui-components';
+import { ModalWrapper } from '@components/timer';
 
 interface AddTimerModalProps {
   isOpen: boolean;
@@ -73,109 +73,86 @@ const AddTimerModal: React.FC<AddTimerModalProps> = ({ isOpen, onClose }) => {
   const isTitleValid = title.trim().length > 0 && title.length <= 50;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-xl">
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex items-center gap-2">
-            <Clock className="w-5 h-5 text-blue-600" />
-            <h2 className="text-xl font-semibold">Add New Timer</h2>
+    <ModalWrapper title="Add New Timer" handleClick={handleClose}>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <Input
+          label={'Title'}
+          type="text"
+          name="title"
+          value={title}
+          placeholder="Enter timer title"
+          required={true}
+          maxLength={50}
+          formError={{
+            hasError: touched.title && !isTitleValid,
+            errorMessage: 'Title is required and must be under 50 characters',
+          }}
+          onChange={(e) => setTitle(e.target.value)}
+          onBlur={() => setTouched({ ...touched, title: true })}
+        >
+          <p className="mt-1 text-sm text-gray-500">{title.length}/50 characters</p>
+        </Input>
+
+        <TextArea
+          label="Description"
+          value={description}
+          name="description"
+          rows={3}
+          placeholder="Enter timer description (optional)"
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <FieldWrapper label="Duration" required>
+          <div className="grid grid-cols-3 gap-4">
+            <Input
+              label="Hours"
+              name="hours"
+              type="number"
+              min="0"
+              max="23"
+              value={hours}
+              onChange={(e) => setHours(Math.min(23, parseInt(e.target.value) || 0))}
+              onBlur={() => setTouched({ ...touched, hours: true })}
+            />
+
+            <Input
+              label="Minutes"
+              name="minutes"
+              type="number"
+              min="0"
+              max="59"
+              value={minutes}
+              onChange={(e) => setMinutes(Math.min(59, parseInt(e.target.value) || 0))}
+              onBlur={() => setTouched({ ...touched, minutes: true })}
+            />
+
+            <Input
+              label="Seconds"
+              name="seconds"
+              type="number"
+              min="0"
+              max="59"
+              value={seconds}
+              onChange={(e) => setSeconds(Math.min(59, parseInt(e.target.value) || 0))}
+              onBlur={() => setTouched({ ...touched, seconds: true })}
+            />
           </div>
-          <button
+        </FieldWrapper>
+
+        <div className="flex justify-end gap-3 pt-4 border-t">
+          <SecondaryButton
+            type="button"
             onClick={handleClose}
-            className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
           >
-            <X className="w-5 h-5" />
-          </button>
+            Cancel
+          </SecondaryButton>
+          <PrimaryButton type="submit" disabled={!isTitleValid || !isTimeValid}>
+            Add Timer
+          </PrimaryButton>
         </div>
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <Input
-            label={'Title'}
-            type="text"
-            name="title"
-            value={title}
-            placeholder="Enter timer title"
-            required={true}
-            maxLength={50}
-            formError={{
-              hasError: touched.title && !isTitleValid,
-              errorMessage: 'Title is required and must be under 50 characters',
-            }}
-            onChange={(e) => setTitle(e.target.value)}
-            onBlur={() => setTouched({ ...touched, title: true })}
-          >
-            <p className="mt-1 text-sm text-gray-500">{title.length}/50 characters</p>
-          </Input>
-
-          <TextArea
-            label="Description"
-            value={description}
-            name="description"
-            rows={3}
-            placeholder="Enter timer description (optional)"
-            onChange={(e) => setDescription(e.target.value)}
-          />
-
-          <FieldWrapper label="Duration" required>
-            <div className="grid grid-cols-3 gap-4">
-              <Input
-                label="Hours"
-                name="hours"
-                type="number"
-                min="0"
-                max="23"
-                value={hours}
-                onChange={(e) => setHours(Math.min(23, parseInt(e.target.value) || 0))}
-                onBlur={() => setTouched({ ...touched, hours: true })}
-              />
-
-              <Input
-                label="Minutes"
-                name="minutes"
-                type="number"
-                min="0"
-                max="59"
-                value={minutes}
-                onChange={(e) => setMinutes(Math.min(59, parseInt(e.target.value) || 0))}
-                onBlur={() => setTouched({ ...touched, minutes: true })}
-              />
-
-              <Input
-                label="Seconds"
-                name="seconds"
-                type="number"
-                min="0"
-                max="59"
-                value={seconds}
-                onChange={(e) => setSeconds(Math.min(59, parseInt(e.target.value) || 0))}
-                onBlur={() => setTouched({ ...touched, seconds: true })}
-              />
-            </div>
-          </FieldWrapper>
-
-          <div className="flex justify-end gap-3 pt-4 border-t">
-            <button
-              type="button"
-              onClick={handleClose}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className={`px-4 py-2 text-sm font-medium text-white rounded-md transition-colors ${
-                isTitleValid && isTimeValid
-                  ? 'bg-blue-600 hover:bg-blue-700'
-                  : 'bg-blue-400 cursor-not-allowed'
-              }`}
-              disabled={!isTitleValid || !isTimeValid}
-            >
-              Add Timer
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+      </form>
+    </ModalWrapper>
   );
 };
 

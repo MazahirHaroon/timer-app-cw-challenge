@@ -13,7 +13,6 @@ export default defineConfig({
       '@utils': '/src/utils',
       '@store': '/src/store',
       '@types': '/src/types',
-      '@constants': '/src/constant.ts',
     },
   },
 });

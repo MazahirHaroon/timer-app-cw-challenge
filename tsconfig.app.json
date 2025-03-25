@@ -9,7 +9,6 @@
       "@utils/*": ["./src/utils/*"],
       "@store/*": ["./src/store/*"],
       "@types/*": ["./src/types/*"],
-      "@constants": ["./src/constants.ts"],
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
