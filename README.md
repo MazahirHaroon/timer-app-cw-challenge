@@ -1,6 +1,111 @@
 # Timer App [In Progress]
 
-A timer application that lets you create multiple timers and run them simultaneously. It also provides option edit the created timers and delete the ones you no longer wants.
+A timer application that lets you create multiple timers and run them simultaneously. It also provides the option to edit the created timers and delete the ones you no longer want.
+
+## Steps to Run the Project
+
+1. **Clone the Repository**:
+   ```bash
+   git clone <repository-url>
+   cd <project-directory>
+   ```
+
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Run the Project**:
+   Start the development server with:
+   ```bash
+   npm start
+   ```
+
+   The app will run on `http://localhost:5173` by default.
+
+---
+
+## Additional Changes and Enhancements
+
+These changes mentioned below improves the **scalability**, **maintainability**, and **clarity** of the codebase, making it easier to work on and extend in the future. The project structure is now cleaner, and there are fewer redundancies across components.
+
+### 1. **Reusable UI Components**
+
+   - Refactored the existing components to create reusable components, improving **maintainability**, **consistency**, and reducing **code duplication** by creating:
+     - **Reusable UI components** for various actions like **FieldWrapper**, **Input**, **TextArea**, and **ErrorMessage**.
+     - **Reusable Button components** for various actions like **Primary**, **Secondary**, **Edit**, **Delete**, **Close**, **Timer PlayPause**, and **Restart** to eliminate redundant code across the application.
+     - Extracted the **ModalWrapper** component, which is now used in both `AddTimerModal` and `EditTimerModal` to eliminate redundant UI code.
+   
+### 2. **Codebase Structure and Cleaner Imports**
+
+   - The codebase has been **restructured** by:
+     - Organizing directories to make the project **modular**.
+     - Adding **import aliases** for cleaner and more maintainable import paths.
+     - Creating index files in various directories to re-export components, simplifying import paths across the project.
+   - Refactored import paths using **alias paths** to simplify the imports and improve code clarity.
+
+   ### Path aliases created:
+   - `@ui`: UI Components Directory
+   - `@components`: Components Directory
+   - `@pages`: Pages Directory
+   - `@utils`: Utils Directory
+   - `@store`: Redux Store Directory
+   - `@types`: Types/Interfaces Directory
+   
+   ### Folder Structure
+
+   ```graphql
+   src/
+   │── components/
+   │   │   ├── UI/
+   │   │   │   ├── Input.tsx
+   │   │   │   ├── TextArea.tsx
+   │   │   │   ├── FieldWrapper.tsx
+   │   │   │   ├── ErrorMessage.tsx
+   │   │   │   ├── index.ts (Re-exports all UI components)
+   │   │   │   ├── Button/
+   │   │   │   │   ├── Primary.tsx
+   │   │   │   │   ├── Secondary.tsx
+   │   │   │   │   ├── Edit.tsx
+   │   │   │   │   ├── Delete.tsx
+   │   │   │   │   ├── Close.tsx
+   │   │   │   │   ├── TimerControls/
+   │   │   │   │   │   ├── PlayPause.tsx
+   │   │   │   │   │   ├── Restart.tsx
+   │   │   ├── timer/(Primitive UI elements used in larger components)
+   │   │   ├── Modal/
+   │   │   │   ├── AddTimerModal.tsx
+   │   │   │   ├── EditTimerModal.tsx
+   │   │   │   ├── ModalWrapper.tsx
+   │   │   ├── EmptyState.tsx
+   │   │   ├── TimerBackground.tsx
+   │   │   ├── TimerControls.tsx
+   │   │   ├── TimerItem.tsx
+   │   │   ├── TimerList.tsx
+   │   │   ├── TimerProgress.tsx
+   │   │   ├── index.ts (Re-exports components)
+   │── store/ (Redux store)
+   │   ├── useTimerStore.ts
+   │── types/ (interfaces/types)
+   │   ├── ui.ts
+   │   ├── timer.ts
+   │── utils/ (utility functions)
+   │   ├── ...
+   │── pages/ (App pages/screens)
+   │   ├── Home.tsx
+   ```
+
+### 3. **Refactoring Timer Store and Hooks**
+
+   - Extracted the **`useTimerStore`** logic into the **hooks directory** for better organization.
+   - Renamed `useTimerStore` to `timerStore` as it now holds only the **Redux-related logic**.
+   - Reorganized the **store** and **timer slice** structure for improved maintainability.
+
+### 4. **Code Formatting with Prettier**
+
+   - Applied **Prettier** for code formatting across the codebase to ensure **consistent style conventions**.
+
+---
 
 ## **Tech Stack**
 
@@ -14,74 +119,11 @@ A timer application that lets you create multiple timers and run them simultaneo
 - **[Sonner](https://github.com/aviraldg/sonner)** (v1.4.3) – A simple toast notification library for React.
 - **[Vitest](https://vitest.dev/)** (v1.3.1) – A fast, unit testing framework built with Vite.
 - **[ESLint](https://eslint.org/)** (v9.9.1) 
-- **[Autoprefixer](https://github.com/postcss/autoprefixer)** (v10.4.18) 
+- **[Autoprefixer](https://github.com/postcss/autoprefixer)** (v10.4.18)
 
-### Path Aliases
+---
 
-- `@ui`: UI Components Directory
-- `@components`: Components Directory
-- `@pages`: Pages Directory
-- `@utils`: Utils Directory
-- `@store`: Redux Store Directory
-- `@types`: Types/Interfaces Directory
-
-
-## Folder Structure
-
-```graphql
-src/
-│── components/
-│   │   ├── UI/
-│   │   │   ├── Input.tsx
-│   │   │   ├── TextArea.tsx
-│   │   │   ├── FieldWrapper.tsx
-│   │   │   ├── ErrorMessage.tsx
-│   │   │   ├── index.ts (Re-exports all UI components)
-│   │   │   ├── Button/
-│   │   │   │   ├── Primary.tsx
-│   │   │   │   ├── Secondary.tsx
-│   │   │   │   ├── Edit.tsx
-│   │   │   │   ├── Delete.tsx
-│   │   │   │   ├── Close.tsx
-│   │   │   │   ├── TimerControls/
-│   │   │   │   │   ├── PlayPause.tsx
-│   │   │   │   │   ├── Restart.tsx
-│   |   |── timer/(Primitive UI elements used in larger components)
-│   │   ├── Modal/
-│   │   │   ├── AddTimerModal.tsx
-│   │   │   ├── EditTimerModal.tsx
-│   │   │   ├── ModalWrapper.tsx
-│   │   ├── EmptyState.tsx
-│   │   ├── TimerBackground.tsx
-│   │   ├── TimerControls.tsx
-│   │   ├── TimerItem.tsx
-│   │   ├── TimerList.tsx
-│   │   ├── TimerProgress.tsx
-│   │   ├── index.ts (Re-exports components)
-│── store/ (Redux store)
-│   ├── useTimerStore.ts
-│── types/ (interfaces/types)
-│   ├── ui.ts
-│   ├── timer.ts
-│── utils/ (utility functions)
-│   ├── ...
-│── pages/ (App pages/screens)
-│   ├── Home.tsx
-```
-
-
----------
----------
-
-
-
-
-
-
-
-
-
-## Assignment Details
+## **Assignment Details**
 
 Welcome to the Timer App Assignment! This project is designed to evaluate your skills in React development, focusing on **UI implementation**, **code quality**, **state management**, and **best practices**. The project uses **React**, **Vite**, **Tailwind CSS**, and **Vitest** for testing.
 
@@ -144,7 +186,9 @@ Your task is to improve and enhance an existing Timer App based on the following
    - [ ] 7. **Validation Snack Bars:**
 
       - Currently, the **Submit button** is disabled when the form is invalid.
-      - Show an **error snack bar** or notification when the form is submitted with invalid data.
+      - Show an **error
+
+ snack bar** or notification when the form is submitted with invalid data.
 
    - [ ] 8. **Responsive Snack Bar Placement:**
 
