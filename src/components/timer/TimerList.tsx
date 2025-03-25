@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useTimerStore } from '@store/useTimerStore';
+import { useTimerStore } from '@custom-hooks';
 
 import { EmptyState, TimerItem } from '@components/timer';
 

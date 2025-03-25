@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { useTimerStore } from '@store/useTimerStore';
+import { useTimerStore } from '@custom-hooks';
 import { validateTimerForm } from '@utils/validation';
 import { Timer } from '@types/timer';
 
