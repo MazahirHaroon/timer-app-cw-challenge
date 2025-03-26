@@ -8,13 +8,12 @@ import { Input, TextArea, FieldWrapper, PrimaryButton, SecondaryButton } from '@
 import { ModalWrapper } from '@components/timer';
 
 interface TimerModalProps {
-  isOpen: boolean;
   onClose: () => void;
   timer?: Timer;
   isEditMode?: boolean;
 }
 
-const TimerModal: React.FC<TimerModalProps> = ({ isOpen, onClose, timer, isEditMode = false }) => {
+const TimerModal: React.FC<TimerModalProps> = ({ onClose, timer, isEditMode = false }) => {
   const [title, setTitle] = useState(timer?.title || '');
   const [description, setDescription] = useState(timer?.description || '');
   const [hours, setHours] = useState(timer ? Math.floor(timer.duration / 3600) : 0);
@@ -28,8 +27,6 @@ const TimerModal: React.FC<TimerModalProps> = ({ isOpen, onClose, timer, isEditM
   });
 
   const { addTimer, editTimer } = useTimerStore();
-
-  if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,7 +53,7 @@ const TimerModal: React.FC<TimerModalProps> = ({ isOpen, onClose, timer, isEditM
       });
     }
 
-    onClose();
+    handleClose();
   };
 
   const handleClose = () => {

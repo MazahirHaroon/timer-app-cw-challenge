@@ -111,13 +111,11 @@ const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
           </div>
         </div>
       </div>
-
-      <TimerModal
-        isOpen={isEditModalOpen}
-        onClose={() => setIsEditModalOpen(false)}
-        timer={timer}
-        isEditMode={true}
-      />
+      {isEditModalOpen ? (
+        <TimerModal onClose={() => setIsEditModalOpen(false)} timer={timer} isEditMode={true} />
+      ) : (
+        ''
+      )}
     </>
   );
 };

@@ -24,8 +24,7 @@ function Home() {
         </div>
 
         <TimerList />
-
-        <TimerModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        {isModalOpen ? <TimerModal onClose={() => setIsModalOpen(false)} /> : ''}
       </div>
     </div>
   );
