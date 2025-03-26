@@ -30,7 +30,7 @@ const Input: React.FC<InputProps> = ({
             : `${required && hasError ? 'border-red-500' : 'border-gray-300'}`
         }`}
       />
-      {hasError ? <ErrorMessage errorMessage={errorMessage} /> : ''}
+      {hasError ? <ErrorMessage errorMessage={errorMessage} /> : null}
       {children}
     </FieldWrapper>
   );
