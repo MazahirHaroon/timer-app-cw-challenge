@@ -179,16 +179,16 @@ Your task is to improve and enhance an existing Timer App based on the following
       - Extract the buttons in the **Add/Edit Timer Modal** as a **separate reusable component**.
       - Replace all instances of similar buttons in the app with this component.
 
-   - [ ] 6. **Consolidate Modal Code:**
+   :heavy_check_mark: 6. **Consolidate Modal Code:**
 
       - Refactor the code to use a **single modal component** for both adding and editing timers, eliminating duplication.
 
-   - [ ] 7. **Validation Snack Bars:**
+   :heavy_check_mark: 7. **Validation Snack Bars:**
 
       - Currently, the **Submit button** is disabled when the form is invalid.
       - Show an **error snack bar** or notification when the form is submitted with invalid data.
 
-   - [ ] 8. **Responsive Snack Bar Placement:**
+   :heavy_check_mark: 8. **Responsive Snack Bar Placement:**
 
       - For **desktop devices**: Display snack bars in the **top-right corner**.
       - For **mobile devices**: Display snack bars at the **bottom of the screen**.
