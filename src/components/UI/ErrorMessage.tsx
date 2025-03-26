@@ -1,8 +1,9 @@
 import React from 'react';
+interface ErrorMessageProps {
+  errorMessage: string;
+}
 
-import { FormErrorType } from '@types/ui';
-
-const ErrorMessage: React.FC<FormErrorType> = ({ hasError, errorMessage }) =>
-  hasError ? <p className="mt-1 text-sm text-red-500">{errorMessage}</p> : '';
-
+const ErrorMessage: React.FC<ErrorMessageProps> = ({ errorMessage }) => (
+  <p className="mt-1 text-sm text-red-500">{errorMessage}</p>
+);
 export default ErrorMessage;
