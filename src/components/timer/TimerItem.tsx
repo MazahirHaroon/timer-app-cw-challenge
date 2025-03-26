@@ -6,7 +6,7 @@ import { Timer } from '@types/timer';
 import { formatTime } from '@utils/time';
 import { TimerAudio } from '@utils/audio';
 
-import { EditTimerModal, TimerControls, TimerProgress } from '@components/timer';
+import { TimerModal, TimerControls, TimerProgress } from '@components/timer';
 import { DeleteButton, EditButton, RestartTimerButton } from '@ui-components';
 
 interface TimerItemProps {
@@ -111,12 +111,11 @@ const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
           </div>
         </div>
       </div>
-
-      <EditTimerModal
-        isOpen={isEditModalOpen}
-        onClose={() => setIsEditModalOpen(false)}
-        timer={timer}
-      />
+      {isEditModalOpen ? (
+        <TimerModal onClose={() => setIsEditModalOpen(false)} timer={timer} isEditMode={true} />
+      ) : (
+        ''
+      )}
     </>
   );
 };

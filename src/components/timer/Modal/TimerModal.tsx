@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { useTimerStore } from '@custom-hooks';
 import { validateTimerForm } from '@utils/validation';
@@ -7,18 +7,18 @@ import { Timer } from '@types/timer';
 import { Input, TextArea, FieldWrapper, PrimaryButton, SecondaryButton } from '@ui-components';
 import { ModalWrapper } from '@components/timer';
 
-interface EditTimerModalProps {
-  isOpen: boolean;
+interface TimerModalProps {
   onClose: () => void;
-  timer: Timer;
+  timer?: Timer;
+  isEditMode?: boolean;
 }
 
-const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose, timer }) => {
-  const [title, setTitle] = useState(timer.title);
-  const [description, setDescription] = useState(timer.description);
-  const [hours, setHours] = useState(Math.floor(timer.duration / 3600));
-  const [minutes, setMinutes] = useState(Math.floor((timer.duration % 3600) / 60));
-  const [seconds, setSeconds] = useState(timer.duration % 60);
+const TimerModal: React.FC<TimerModalProps> = ({ onClose, timer, isEditMode = false }) => {
+  const [title, setTitle] = useState(timer?.title || '');
+  const [description, setDescription] = useState(timer?.description || '');
+  const [hours, setHours] = useState(timer ? Math.floor(timer.duration / 3600) : 0);
+  const [minutes, setMinutes] = useState(timer ? Math.floor((timer.duration % 3600) / 60) : 0);
+  const [seconds, setSeconds] = useState(timer ? timer.duration % 60 : 0);
   const [touched, setTouched] = useState({
     title: false,
     hours: false,
@@ -26,25 +26,7 @@ const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose, timer 
     seconds: false,
   });
 
-  const { editTimer } = useTimerStore();
-
-  useEffect(() => {
-    if (isOpen) {
-      setTitle(timer.title);
-      setDescription(timer.description);
-      setHours(Math.floor(timer.duration / 3600));
-      setMinutes(Math.floor((timer.duration % 3600) / 60));
-      setSeconds(timer.duration % 60);
-      setTouched({
-        title: false,
-        hours: false,
-        minutes: false,
-        seconds: false,
-      });
-    }
-  }, [isOpen, timer]);
-
-  if (!isOpen) return null;
+  const { addTimer, editTimer } = useTimerStore();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,13 +37,23 @@ const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose, timer 
 
     const totalSeconds = hours * 3600 + minutes * 60 + seconds;
 
-    editTimer(timer.id, {
-      title: title.trim(),
-      description: description.trim(),
-      duration: totalSeconds,
-    });
+    if (isEditMode && timer) {
+      editTimer(timer.id, {
+        title: title.trim(),
+        description: description.trim(),
+        duration: totalSeconds,
+      });
+    } else {
+      addTimer({
+        title: title.trim(),
+        description: description.trim(),
+        duration: totalSeconds,
+        remainingTime: totalSeconds,
+        isRunning: false,
+      });
+    }
 
-    onClose();
+    handleClose();
   };
 
   const handleClose = () => {
@@ -78,7 +70,7 @@ const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose, timer 
   const isTitleValid = title.trim().length > 0 && title.length <= 50;
 
   return (
-    <ModalWrapper title="Edit Timer" handleClick={handleClose}>
+    <ModalWrapper title={isEditMode ? 'Edit Timer' : 'Add New Timer'} handleClick={handleClose}>
       <form onSubmit={handleSubmit} className="space-y-6">
         <Input
           label={'Title'}
@@ -86,6 +78,7 @@ const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose, timer 
           name="title"
           value={title}
           placeholder="Enter timer title"
+          required={true}
           maxLength={50}
           formError={{
             hasError: touched.title && !isTitleValid,
@@ -100,10 +93,10 @@ const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose, timer 
         <TextArea
           label="Description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          name="description"
           rows={3}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Enter timer description (optional)"
+          onChange={(e) => setDescription(e.target.value)}
         />
 
         <FieldWrapper label="Duration" required>
@@ -152,7 +145,7 @@ const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose, timer 
             Cancel
           </SecondaryButton>
           <PrimaryButton type="submit" disabled={!isTitleValid || !isTimeValid}>
-            Save Changes
+            {isEditMode ? 'Save Changes' : 'Add Timer'}
           </PrimaryButton>
         </div>
       </form>
@@ -160,4 +153,4 @@ const EditTimerModal: React.FC<EditTimerModalProps> = ({ isOpen, onClose, timer 
   );
 };
 
-export default EditTimerModal;
+export default TimerModal;
