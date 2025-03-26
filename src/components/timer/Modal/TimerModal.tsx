@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { useTimerStore } from '@custom-hooks';
 import { validateTimerForm } from '@utils/validation';
