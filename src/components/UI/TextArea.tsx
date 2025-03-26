@@ -29,7 +29,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         } w-full px-4 py-2 border rounded-md focus:outline-2 focus:outline-blue-500`}
       />
 
-      <ErrorMessage hasError={hasError} errorMessage={errorMessage} />
+      {hasError ? <ErrorMessage errorMessage={errorMessage} /> : ''}
 
       {children}
     </FieldWrapper>
