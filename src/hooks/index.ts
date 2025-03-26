@@ -1,3 +1,4 @@
 import { useTimerStore } from './useTimerStore';
+import { useToasterPosition } from './useToasterPosition';
 
-export { useTimerStore };
+export { useTimerStore, useToasterPosition };
