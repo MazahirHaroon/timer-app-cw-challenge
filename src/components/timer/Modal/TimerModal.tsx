@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
+// import { toast } from 'sonner';
 
 import { useTimerStore } from '@custom-hooks';
 import { validateTimerForm } from '@utils/validation';
 import { Timer } from '@types/timer';
 
-import { Input, TextArea, FieldWrapper, PrimaryButton, SecondaryButton } from '@ui-components';
+import {
+  Input,
+  TextArea,
+  FieldWrapper,
+  PrimaryButton,
+  SecondaryButton,
+  ErrorMessage,
+} from '@ui-components';
 import { ModalWrapper } from '@components/timer';
 
 interface TimerModalProps {
@@ -26,6 +34,7 @@ const TimerModal: React.FC<TimerModalProps> = ({ onClose, timer, isEditMode = fa
     seconds: false,
   });
 
+  const hasTouchedTimeFields = touched.hours || touched.minutes || touched.seconds;
   const { addTimer, editTimer } = useTimerStore();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -134,6 +143,9 @@ const TimerModal: React.FC<TimerModalProps> = ({ onClose, timer, isEditMode = fa
               onBlur={() => setTouched({ ...touched, seconds: true })}
             />
           </div>
+          {!isTimeValid && hasTouchedTimeFields ? (
+            <ErrorMessage errorMessage={'Please set a time greater than 0'} />
+          ) : null}
         </FieldWrapper>
 
         <div className="flex justify-end gap-3 pt-4 border-t">
@@ -144,9 +156,7 @@ const TimerModal: React.FC<TimerModalProps> = ({ onClose, timer, isEditMode = fa
           >
             Cancel
           </SecondaryButton>
-          <PrimaryButton type="submit" disabled={!isTitleValid || !isTimeValid}>
-            {isEditMode ? 'Save Changes' : 'Add Timer'}
-          </PrimaryButton>
+          <PrimaryButton type="submit">{isEditMode ? 'Save Changes' : 'Add Timer'}</PrimaryButton>
         </div>
       </form>
     </ModalWrapper>
